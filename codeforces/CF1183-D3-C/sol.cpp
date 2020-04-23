@@ -32,10 +32,32 @@ void debug(string msg, T t) {
 
 int toDigit(char c) { return c - '0'; }
 
+ll t, k, n, a, b;
 
 int main() {
 
-	
+	sint(t);
+	while(t--) {
+		scanf("%lld %lld %lld %lld", &k, &n, &a, &b);
+
+		ll tmpK = k;
+		int l = 0, r = min((int) ceil((k / (double)a) - 1.0), n), m, maxM = -1;
+		while(l <= r) {
+			m = l + (r - l) / 2;
+			k = k - (m * a + (n - m) * b);
+			
+			if(k > 0) {
+				maxM = max(maxM, m);
+				l = m + 1;
+			} else {
+				r = m - 1;
+			}
+
+			k = tmpK;
+		}
+
+		printf("%d\n", maxM);
+	}
 	
 	return 0;
 }

@@ -32,10 +32,13 @@ void debug(string msg, T t) {
 
 int toDigit(char c) { return c - '0'; }
 
+int n, r;
 
 int main() {
 
-	
-	
+	scanf("%d %d", &n, &r);
+	double oneCircleAngle = sin(PI / n);
+	printf("%.7f\n", (r * oneCircleAngle) / (1 - oneCircleAngle));
+
 	return 0;
 }

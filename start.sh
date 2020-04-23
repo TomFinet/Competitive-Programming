@@ -1,3 +1,5 @@
+mkdir ~/Compsci/Competitive-Programming/$1/$2/
+cat <<\EOF > ~/Compsci/Competitive-Programming/$1/$2/sol.cpp
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -39,3 +41,4 @@ int main() {
 	
 	return 0;
 }
+EOF
