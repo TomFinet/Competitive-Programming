@@ -1,5 +1,3 @@
-mkdir ~/Compsci/Competitive-Programming/$1/$2/
-cat <<\EOF > ~/Compsci/Competitive-Programming/$1/$2/sol.cpp
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -34,12 +32,34 @@ void debug(string msg, T t) {
 
 int toDigit(char c) { return c - '0'; }
 
+int a, n, negEven, negOdd, numNeg;
+ll ansPos;
 
 int main() {
 
-	
+	sint(n);
+
+	for(int i = 0; i < n; i++) {
+		sint(a);
+
+		if(numNeg % 2 == 0) {
+			negEven++;
+		} else {
+			negOdd++;
+		}
+
+		if(a < 0) {
+			numNeg++;
+		}
+
+		if(numNeg % 2 == 0) {
+			ansPos += negEven;
+		} else {
+			ansPos += negOdd;
+		}
+	}
+
+	printf("%lld %lld\n", 1ll * n * (n + 1) / 2 - ansPos, ansPos);
 	
 	return 0;
 }
-EOF
-cd .$1/$2/
