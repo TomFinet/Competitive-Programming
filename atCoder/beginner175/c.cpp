@@ -1,6 +1,4 @@
-mkdir ~/Compsci/Competitive-Programming/$1/$2/
-cat <<\EOF > ~/Compsci/Competitive-Programming/$1/$2/$3.cpp
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -12,8 +10,8 @@ typedef vector<int> vi;
 #define mem(a, b) memset(a, b, sizeof(a))
 
 const int MOD = 1000000007;
+const int MAX = (int) 1e9;
 const double PI = 3.141592653589793238462643383279502884;
-const ll INF = 1e18;
 
 template <typename T, typename U>
 T max(T x, U y) {
@@ -30,17 +28,35 @@ void debug(string msg, T t) {
 	cout << msg << ": " << t << "\n";
 }
 
-inline int toDigit(char c) { return c - '0'; }
+int toDigit(char c) { return c - '0'; }
 
+ll x, k, d, ans;
 
 int main() {
 
-	ios_base::sync_with_stdio(0);
-	cin.tie(0); cout.tie(0);
+	cin >> x >> k >> d;
 
+	x = x < 0 ? -1 * x : x; // symmetric so doesn't matter 
+	// if x is positive or negative
 
+	ll moveToNeg = (x / d) + 1;
+	if(moveToNeg >= k) {
+		ans = x - k * d;
+	} else {
+
+		k -= moveToNeg;
+		if(k % 2 == 0) {
+			ans = x - moveToNeg * d;
+		} else {
+			ans = x - (moveToNeg - 1) * d;
+		}
+	}
+
+	if(ans < 0) {
+		ans *= -1;
+	}
+
+	cout << ans << "\n";
 
 	return 0;
 }
-EOF
-cd ./$1/$2/

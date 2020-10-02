@@ -10,8 +10,8 @@ typedef vector<int> vi;
 #define mem(a, b) memset(a, b, sizeof(a))
 
 const int MOD = 1000000007;
-const int MAX = (int) 1e9;
 const double PI = 3.141592653589793238462643383279502884;
+const ll INF = 1e18;
 
 template <typename T, typename U>
 T max(T x, U y) {
@@ -30,12 +30,12 @@ void debug(string msg, T t) {
 
 inline int toDigit(char c) { return c - '0'; }
 
-int t, n, a[100000], b[100000];
+int t, n, a[100000];
 
 int main() {
 
 	ios_base::sync_with_stdio(0);
-	cin.tie(0); 
+	cin.tie(0); cout.tie(0);
 
 	cin >> t;
 	while(t--) {
@@ -43,35 +43,22 @@ int main() {
 		cin >> n;
 		for(int i = 0; i < n; i++) {
 			cin >> a[i];
+			a[i] = __lg(a[i]);
 		}
 
-		for(int i = 0; i < n; i++) {
-			cin >> b[i];
-		}
-
-		bool hasPos = false, hasNeg = false, possible = true;
-		for(int i = 0; i < n; i++) {
-			if(a[i] < b[i] && !hasPos) {
-				// needs to increase so we need a 1 in any spot from [0, i - 1]
-				cout << "NO\n";
-				possible = false;
-				break;
-			} else if(a[i] > b[i] && !hasNeg) {
-				// needs to decrease so we need a -1 in any spot from [0, i - 1]
-				cout << "NO\n";
-				possible = false;
-				break;
+		// count number of a[i] with same value
+		ll ans = 0;
+		for(int j = 0; j < 30; j++) {
+			ll b = 0;
+			for(int i = 0; i < n; i++) {
+				if(a[i] == j) b++;
 			}
-
-			if(a[i] == 1) { hasPos = true; }
-			if(a[i] == -1) { hasNeg = true; }
+			ans += b * (b - 1) / 2;
 		}
 
-		if(possible) {
-			cout << "YES\n";
-		}
+		cout << ans << "\n";
+
 	}
-
 
 	return 0;
 }

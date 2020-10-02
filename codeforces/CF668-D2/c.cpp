@@ -10,8 +10,8 @@ typedef vector<int> vi;
 #define mem(a, b) memset(a, b, sizeof(a))
 
 const int MOD = 1000000007;
-const int MAX = (int) 1e9;
 const double PI = 3.141592653589793238462643383279502884;
+const ll INF = 1e18;
 
 template <typename T, typename U>
 T max(T x, U y) {
@@ -30,48 +30,39 @@ void debug(string msg, T t) {
 
 inline int toDigit(char c) { return c - '0'; }
 
-int t, n, a[100000], b[100000];
+inline int abs(int a, int b) { return a > b ? a - b : b - a; }
+
+int t, n, k;
+string s;
 
 int main() {
 
 	ios_base::sync_with_stdio(0);
-	cin.tie(0); 
+	cin.tie(0); cout.tie(0);
 
 	cin >> t;
 	while(t--) {
+		cin >> n >> k >> s;
 
-		cin >> n;
+		bool possible = true;
 		for(int i = 0; i < n; i++) {
-			cin >> a[i];
+			if(s[i] == '0' && s[i % k] == '1')  possible = false;
+			else if(s[i] == '1' && s[i % k] == '0') possible = false;
+			else if(s[i] != '?' && s[i % k] == '?') s[i % k] = s[i];
+			else if(s[i] == '?' && s[i % k] != '?') s[i] = s[i % k];
 		}
 
-		for(int i = 0; i < n; i++) {
-			cin >> b[i];
+		int cnt0 = 0, cnt1 = 0;
+		for(int i = 0; i < k; i++) {
+			if(s[i] == '0') cnt0++;
+			else if(s[i] == '1') cnt1++;
 		}
 
-		bool hasPos = false, hasNeg = false, possible = true;
-		for(int i = 0; i < n; i++) {
-			if(a[i] < b[i] && !hasPos) {
-				// needs to increase so we need a 1 in any spot from [0, i - 1]
-				cout << "NO\n";
-				possible = false;
-				break;
-			} else if(a[i] > b[i] && !hasNeg) {
-				// needs to decrease so we need a -1 in any spot from [0, i - 1]
-				cout << "NO\n";
-				possible = false;
-				break;
-			}
+		if(2 * cnt0 > k || 2 * cnt1 > k) possible = false;
 
-			if(a[i] == 1) { hasPos = true; }
-			if(a[i] == -1) { hasNeg = true; }
-		}
-
-		if(possible) {
-			cout << "YES\n";
-		}
+		if(possible) cout << "YES\n";
+		else cout << "NO\n";
 	}
-
 
 	return 0;
 }

@@ -1,5 +1,3 @@
-mkdir ~/Compsci/Competitive-Programming/$1/$2/
-cat <<\EOF > ~/Compsci/Competitive-Programming/$1/$2/$3.cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -32,15 +30,28 @@ void debug(string msg, T t) {
 
 inline int toDigit(char c) { return c - '0'; }
 
+int lcm(int a, int b) {
+	return (a * b) / __gcd(a, b);
+}
+
+int t, l, r;
 
 int main() {
 
 	ios_base::sync_with_stdio(0);
 	cin.tie(0); cout.tie(0);
 
+	cin >> t;
+	while(t--) {
 
+		cin >> l >> r;
+
+		if(2 * l <= r) {
+			cout << l << " " << 2 * l << "\n";
+		} else {
+			cout << -1 << " " << -1 << "\n";
+		}
+	}
 
 	return 0;
 }
-EOF
-cd ./$1/$2/

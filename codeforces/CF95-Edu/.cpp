@@ -1,5 +1,3 @@
-mkdir ~/Compsci/Competitive-Programming/$1/$2/
-cat <<\EOF > ~/Compsci/Competitive-Programming/$1/$2/$3.cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -42,5 +40,3 @@ int main() {
 
 	return 0;
 }
-EOF
-cd ./$1/$2/

@@ -2,21 +2,24 @@
 
 using namespace std;
 
-int x;
+long long x;
+
+long long lcm(long long a, long long b) {
+	return (a * b) / __gcd(a, b);
+}
 
 int main() {
 
-	scanf("%d", &x);
+	scanf("%lld", &x);
 	
-	int a = x;
-	int b = 1;
-	for(int i = 2; i * i < x; i++) {
+	long long a = x;
+	for(long long i = 2; i * i < x; i++) {
 		if(x % i == 0 && lcm(i, x / i) == x) {
-			a = min(a, x / i);
+			a = i;
 		}
 	}
 
-	printf("%d %d\n", x / a, a);
+	printf("%lld %lld\n", x / a, a);
 
 	return 0;
 }

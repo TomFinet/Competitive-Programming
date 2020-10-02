@@ -1,5 +1,3 @@
-mkdir ~/Compsci/Competitive-Programming/$1/$2/
-cat <<\EOF > ~/Compsci/Competitive-Programming/$1/$2/$3.cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -32,15 +30,35 @@ void debug(string msg, T t) {
 
 inline int toDigit(char c) { return c - '0'; }
 
+int n;
 
 int main() {
 
 	ios_base::sync_with_stdio(0);
 	cin.tie(0); cout.tie(0);
 
+	cin >> n;
 
+	int c = 1;
+	int colors[n] = {0};
+	bool prime[n + 5];
+
+	memset(prime, true, sizeof(prime));
+
+	for(int i = 2; i <= n; i++) {
+		if(prime[i]) {
+			for(int j = i; j <= n; j += i) {
+				prime[j] = false;
+				if(colors[j - 1] == 0) colors[j - 1] = c;
+			}
+			prime[i] = true;
+			c++;
+		}
+	}
+
+	for(int i = 1; i <= n - 1; i++) {
+		cout << colors[i] << " ";
+	}
 
 	return 0;
 }
-EOF
-cd ./$1/$2/

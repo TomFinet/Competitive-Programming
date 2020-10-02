@@ -1,6 +1,4 @@
-mkdir ~/Compsci/Competitive-Programming/$1/$2/
-cat <<\EOF > ~/Compsci/Competitive-Programming/$1/$2/$3.cpp
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -12,8 +10,8 @@ typedef vector<int> vi;
 #define mem(a, b) memset(a, b, sizeof(a))
 
 const int MOD = 1000000007;
+const int MAX = (int) 1e9;
 const double PI = 3.141592653589793238462643383279502884;
-const ll INF = 1e18;
 
 template <typename T, typename U>
 T max(T x, U y) {
@@ -30,17 +28,31 @@ void debug(string msg, T t) {
 	cout << msg << ": " << t << "\n";
 }
 
-inline int toDigit(char c) { return c - '0'; }
+int toDigit(char c) { return c - '0'; }
 
+int n, l[100], ans;
 
 int main() {
 
-	ios_base::sync_with_stdio(0);
-	cin.tie(0); cout.tie(0);
+	cin >> n;
 
+	for(int i = 0; i < n; i++) {
+		cin >> l[i];
+	}
 
+	for(int i = 0; i < n; i++) {
+		for(int j = i + 1; j < n; j++) {
+			for(int k = j + 1; k < n; k++) {
+				if(l[i] != l[j] && l[i] != l[k] && l[j] != l[k]) {
+					if(l[i] + l[j] > l[k] && l[i] + l[k] > l[j] && l[j] + l[k] > l[i]) {
+						ans++;
+					}
+				}
+			}
+		}
+	}
+
+	cout << ans << "\n";
 
 	return 0;
 }
-EOF
-cd ./$1/$2/

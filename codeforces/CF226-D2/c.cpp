@@ -1,5 +1,3 @@
-mkdir ~/Compsci/Competitive-Programming/$1/$2/
-cat <<\EOF > ~/Compsci/Competitive-Programming/$1/$2/$3.cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -32,15 +30,41 @@ void debug(string msg, T t) {
 
 inline int toDigit(char c) { return c - '0'; }
 
+const int maxX = 10000000;
+
+int n, x, m, l, r, cnt[maxX + 5], pre[maxX + 5];
+bool p[10000005];
 
 int main() {
 
 	ios_base::sync_with_stdio(0);
 	cin.tie(0); cout.tie(0);
 
+	memset(p, true, sizeof(p));
 
+	cin >> n;
+	for(int i = 0; i < n; i++) {
+		cin >> x;
+		cnt[x]++; // count occurences of each number in x
+	}
+
+	for(int i = 2; i <= maxX; i++) {
+		pre[i] = pre[i - 1];
+		if(p[i]) {
+			for(int j = i; j <= maxX; j += i) {
+				pre[i] += cnt[j];
+				p[j] = false;
+			}
+		}
+	}
+
+	cin >> m;
+	for(int i = 0; i < m; i++) {
+		cin >> l >> r;
+		l = min(l, maxX);
+		r = min(r, maxX);
+		cout << pre[r] - pre[l - 1] << "\n";
+	}
 
 	return 0;
 }
-EOF
-cd ./$1/$2/

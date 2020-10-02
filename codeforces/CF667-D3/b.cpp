@@ -30,48 +30,39 @@ void debug(string msg, T t) {
 
 inline int toDigit(char c) { return c - '0'; }
 
-int t, n, a[100000], b[100000];
+int t;
+ll a, b, x, y, n;
 
 int main() {
 
 	ios_base::sync_with_stdio(0);
-	cin.tie(0); 
+	cin.tie(0); cout.tie(0);
+
 
 	cin >> t;
 	while(t--) {
+		cin >> a >> b >> x >> y >> n;
 
-		cin >> n;
-		for(int i = 0; i < n; i++) {
-			cin >> a[i];
-		}
+		ll n1 = n;
+		ll j = min(n1, a - x);
+		ll a1 = a - j;
+		n1 -= j;
+		ll b1 = b - min(n1, b - y);
+		ll prod1 = a1 * b1;
 
-		for(int i = 0; i < n; i++) {
-			cin >> b[i];
-		}
+		ll n2 = n;
+		j = min(n2, b - y);
+		ll b2 = b - j;
+		n2 -= j;
+		ll a2 = a - min(n2, a - x);
+		ll prod2 = a2 * b2;
 
-		bool hasPos = false, hasNeg = false, possible = true;
-		for(int i = 0; i < n; i++) {
-			if(a[i] < b[i] && !hasPos) {
-				// needs to increase so we need a 1 in any spot from [0, i - 1]
-				cout << "NO\n";
-				possible = false;
-				break;
-			} else if(a[i] > b[i] && !hasNeg) {
-				// needs to decrease so we need a -1 in any spot from [0, i - 1]
-				cout << "NO\n";
-				possible = false;
-				break;
-			}
-
-			if(a[i] == 1) { hasPos = true; }
-			if(a[i] == -1) { hasNeg = true; }
-		}
-
-		if(possible) {
-			cout << "YES\n";
+		if(prod1 > prod2) {
+			cout << prod2 << "\n";
+		} else {
+			cout << prod1 << "\n";
 		}
 	}
-
 
 	return 0;
 }

@@ -1,5 +1,3 @@
-mkdir ~/Compsci/Competitive-Programming/$1/$2/
-cat <<\EOF > ~/Compsci/Competitive-Programming/$1/$2/$3.cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -32,15 +30,14 @@ void debug(string msg, T t) {
 
 inline int toDigit(char c) { return c - '0'; }
 
+int n;
+int arr[] = {1,18,1800,670320,734832000,890786230,695720788,150347555};
 
 int main() {
 
-	ios_base::sync_with_stdio(0);
-	cin.tie(0); cout.tie(0);
-
-
+	cin >> n;
+	if(n % 2 == 0) cout << 0 << "\n";
+	else cout << arr[n / 2] << "\n";
 
 	return 0;
 }
-EOF
-cd ./$1/$2/

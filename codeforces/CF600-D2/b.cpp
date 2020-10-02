@@ -1,5 +1,3 @@
-mkdir ~/Compsci/Competitive-Programming/$1/$2/
-cat <<\EOF > ~/Compsci/Competitive-Programming/$1/$2/$3.cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -32,15 +30,25 @@ void debug(string msg, T t) {
 
 inline int toDigit(char c) { return c - '0'; }
 
+int n, a[100005];
 
 int main() {
 
 	ios_base::sync_with_stdio(0);
 	cin.tie(0); cout.tie(0);
 
+	
+	cin >> n;
+	for(int i = 0; i < n; i++) cin >> a[i];
 
+	// for a valid day the sum must be 0
+	// we can 
+	// maintain a set of employees which have entered
+	// at the end of a day that set must be empty
+	// when an employee enters for the second time,
+	// the set must be empty and a new day begins
+
+	
 
 	return 0;
 }
-EOF
-cd ./$1/$2/

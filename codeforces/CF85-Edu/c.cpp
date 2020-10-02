@@ -30,7 +30,8 @@ void debug(string msg, T t) {
 
 inline int toDigit(char c) { return c - '0'; }
 
-int t, n, a[100000], b[100000];
+int t, n;
+ll a[300000], b[300000];
 
 int main() {
 
@@ -43,35 +44,34 @@ int main() {
 		cin >> n;
 		for(int i = 0; i < n; i++) {
 			cin >> a[i];
-		}
-
-		for(int i = 0; i < n; i++) {
 			cin >> b[i];
 		}
 
-		bool hasPos = false, hasNeg = false, possible = true;
+		// if a monster dies last its explosion damage will be wasted.
+		// so shoot the monster who receives the least explosion damage first.
+
+		int start = 0;
+		ll minDmg = (ll) 1e13;
 		for(int i = 0; i < n; i++) {
-			if(a[i] < b[i] && !hasPos) {
-				// needs to increase so we need a 1 in any spot from [0, i - 1]
-				cout << "NO\n";
-				possible = false;
-				break;
-			} else if(a[i] > b[i] && !hasNeg) {
-				// needs to decrease so we need a -1 in any spot from [0, i - 1]
-				cout << "NO\n";
-				possible = false;
-				break;
+			int p = i == 0 ? n - 1 : i - 1;
+			if(min(a[i], b[p]) < minDmg) {
+				minDmg = min(a[i], b[p]);
+				start = i;
 			}
-
-			if(a[i] == 1) { hasPos = true; }
-			if(a[i] == -1) { hasNeg = true; }
+		}
+		
+		ll shots = 0;
+		for(int i = 0; i < n; i++) {
+			if(i == start) {
+				shots += a[i];
+			} else {
+				int p = i == 0 ? n - 1 : i - 1;
+				shots += max(a[i] - b[p], 0);
+			}
 		}
 
-		if(possible) {
-			cout << "YES\n";
-		}
+		cout << shots << "\n";
 	}
-
 
 	return 0;
 }

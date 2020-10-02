@@ -1,5 +1,3 @@
-mkdir ~/Compsci/Competitive-Programming/$1/$2/
-cat <<\EOF > ~/Compsci/Competitive-Programming/$1/$2/$3.cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -32,6 +30,9 @@ void debug(string msg, T t) {
 
 inline int toDigit(char c) { return c - '0'; }
 
+int t, n;
+ll p, a;
+bool yes;
 
 int main() {
 
@@ -39,8 +40,24 @@ int main() {
 	cin.tie(0); cout.tie(0);
 
 
+	// if in boxes are in non-increasing order then it is NO
+
+	cin >> t;
+	while(t--) {
+
+		cin >> n;
+		cin >> p;
+		
+		yes = false;
+		for(int i = 1; i < n; i++) {
+			cin >> a;
+			if(p <= a) yes = true;
+			p = a;
+		}
+
+		if(yes) cout << "YES\n";
+		else cout << "NO\n";
+	}
 
 	return 0;
 }
-EOF
-cd ./$1/$2/

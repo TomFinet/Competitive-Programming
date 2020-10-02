@@ -17,8 +17,12 @@ T min(T x, U y) {
     return x < y ? x : y;
 }
 
-int t, n, m, a[1000]; // color of ith element
-vector<int> p = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31}; // first 11 primes
+int t, n, k, ans;
+string s;
+
+inline int pack(int empty) {
+	return (empty + k) / (k + 1);
+}
 
 int main() {
 
@@ -28,35 +32,37 @@ int main() {
 	cin >> t;
 	while(t--) {
 
-		cin >> n;
+		cin >> n >> k >> s;
 
+		ans = 0;
 		for(int i = 0; i < n; i++) {
-			cin >> a[i];
-		}
 
-		int c[n] = {0};
+			int j = i + 1;
 
-		int m = 0;
-		for(int j = 0; j < 11; j++) {
-			bool got = false;
-			for(int i = 0; i < n; i++) {
-				if(a[i] % p[j] == 0 && c[i] == 0) {
-					c[i] = m + 1;
-					got = true;
-				}
+			for(; s[j] == 0 && j < n; j++);
+
+			int len = j - i;
+
+			// calculate length of useable zeros.
+			if(s[i] == '1') {
+				len -= k;
+			} else {
+				len++;
 			}
 
-			if(got) {
-				m++;
+			if(s[j] == '1') {
+				len -= (1 + k);
 			}
+
+			if(len > 0) {
+				ans += pack(len);
+			}
+
+			i = j;
+
 		}
 
-		cout << m << "\n";
-
-		for(int i = 0; i < n; i++) {
-			cout << c[i] << " ";
-		}
-		cout << "\n";
+		cout << ans << "\n";
 	}
 
 	return 0;

@@ -30,48 +30,35 @@ void debug(string msg, T t) {
 
 inline int toDigit(char c) { return c - '0'; }
 
-int t, n, a[100000], b[100000];
+int t, a, b;
 
 int main() {
 
 	ios_base::sync_with_stdio(0);
-	cin.tie(0); 
+	cin.tie(0); cout.tie(0);
 
 	cin >> t;
 	while(t--) {
 
-		cin >> n;
-		for(int i = 0; i < n; i++) {
-			cin >> a[i];
+		cin >> a >> b;
+
+		if(a > b) {
+			int tmp = a;
+			a = b;
+			b = tmp;
 		}
 
-		for(int i = 0; i < n; i++) {
-			cin >> b[i];
+		int diff = b - a;
+
+		int ans = 0;
+		for(int k = 10; k > 0; k--) {
+			ans += diff / k;
+			diff %= k;
 		}
 
-		bool hasPos = false, hasNeg = false, possible = true;
-		for(int i = 0; i < n; i++) {
-			if(a[i] < b[i] && !hasPos) {
-				// needs to increase so we need a 1 in any spot from [0, i - 1]
-				cout << "NO\n";
-				possible = false;
-				break;
-			} else if(a[i] > b[i] && !hasNeg) {
-				// needs to decrease so we need a -1 in any spot from [0, i - 1]
-				cout << "NO\n";
-				possible = false;
-				break;
-			}
+		cout << ans << "\n";
 
-			if(a[i] == 1) { hasPos = true; }
-			if(a[i] == -1) { hasNeg = true; }
-		}
-
-		if(possible) {
-			cout << "YES\n";
-		}
 	}
-
 
 	return 0;
 }
